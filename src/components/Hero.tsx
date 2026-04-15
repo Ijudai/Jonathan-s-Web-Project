@@ -73,11 +73,11 @@ export default function Hero() {
             backgroundSize: "200% auto",
           }}
         >
-          Elevating Hospitality Standards
+          Elevating Industry Standards
         </h1>
         
         <p ref={subRef} className="text-lg md:text-xl text-gray-300 font-sans max-w-2xl">
-          Transforming restaurants, lounges, and hospitality establishments into high-performing, world-class destinations. Delivering over 100+ years of combined expertise.
+          A multi-faceted powerhouse specializing in General Contracting, Consulting, Supply Chain, and Hospitality. Delivering over 100+ years of combined expertise.
         </p>
       </div>
 

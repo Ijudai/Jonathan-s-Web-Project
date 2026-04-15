@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import gsap from "gsap";
-import { Crown } from "lucide-react";
+import { Crown, Phone, Mail } from "lucide-react";
 
 export default function ContactForm() {
   const formRef = useRef<HTMLDivElement>(null);
@@ -33,15 +33,46 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="relative w-full min-h-screen bg-navy flex items-center justify-center p-4 py-20">
+    <section id="contact" className="relative w-full min-h-screen bg-navy flex items-center justify-center p-4 py-24">
       
-      <div className="w-full max-w-2xl relative z-10 text-center">
-        <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">Strategic Partnership</h2>
-        <p className="text-gold font-sans tracking-widest uppercase text-sm mb-12">Transform Your Brand</p>
+      <div className="w-full max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+        {/* Left Side: Contact Info */}
+        <div>
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">Strategic Partnership</h2>
+          <p className="text-gold font-sans tracking-widest uppercase text-sm mb-12">Transform Your Brand</p>
 
+          <p className="text-gray-300 font-sans text-lg mb-10 max-w-md">
+            Reach out to our experts to discuss how Luxora Dynamix can elevate your establishment to world-class standards.
+          </p>
+
+          <div className="space-y-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-full border border-gold flex items-center justify-center bg-[rgba(201,169,98,0.1)]">
+                <Phone className="text-gold" size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400 uppercase tracking-widest font-sans mb-1">Direct Lines</p>
+                <p className="text-white font-sans text-lg">+234 802 741 7453</p>
+                <p className="text-white font-sans text-lg">+234 814 505 9511</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-full border border-gold flex items-center justify-center bg-[rgba(201,169,98,0.1)]">
+                <Mail className="text-gold" size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400 uppercase tracking-widest font-sans mb-1">Email</p>
+                <p className="text-white font-sans text-lg">luxoradynamix@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Form */}
         <div className="relative">
-          {/* Form */}
-          <div ref={formRef} className={`glass-panel p-8 md:p-12 rounded-3xl ${submitted ? 'pointer-events-none' : ''}`}>
+          <div ref={formRef} className={`glass-panel p-8 md:p-10 rounded-3xl ${submitted ? 'pointer-events-none' : ''}`}>
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
               <div className="flex flex-col md:flex-row gap-6">
                 <input 
@@ -66,7 +97,7 @@ export default function ContactForm() {
               />
 
               <textarea 
-                placeholder="Describe your hospitality business needs..." 
+                placeholder="Describe your business needs..." 
                 rows={4}
                 required
                 className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(201,169,98,0.3)] rounded-lg p-4 text-white focus:outline-none focus:border-gold transition-colors font-sans resize-none"
@@ -90,8 +121,8 @@ export default function ContactForm() {
               <Crown className="text-navy w-12 h-12 mb-1" />
               <span className="text-navy font-serif font-bold text-sm tracking-widest">RECEIVED</span>
             </div>
-            <p className="mt-6 text-white text-xl font-serif drop-shadow-md">
-              Your inquiry has been received. Our team will contact you shortly.
+            <p className="mt-6 text-white text-xl font-serif drop-shadow-md text-center bg-navy/80 p-4 rounded-xl border border-gold/30">
+              Your inquiry has been received.<br/>Our team will contact you shortly.
             </p>
           </div>
         </div>

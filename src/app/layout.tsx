@@ -15,12 +15,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Luxora Dynamix | Premium Hospitality Consulting Africa",
-  description: "Transforming restaurants, lounges, and clubs into high-performing, world-class destinations. Expert menu engineering, staff recruitment, and operational systems.",
-  keywords: ["Hospitality Consulting Africa", "Restaurant Management Systems", "Menu Engineering", "Staff Recruitment Nigeria", "B2B Hospitality Strategy Abuja", "Franchise Development Kaduna"],
+  title: "Luxora Dynamix | General Contracting, Consulting, Supply Chain & Hospitality",
+  description: "A multi-faceted powerhouse specializing in General Contracting, Consulting, Supply Chain, and Hospitality across Africa.",
+  keywords: ["General Contracting Africa", "Business Consulting", "Supply Chain Optimization", "Hospitality Management", "Restaurant Management Systems", "Business Strategy Abuja"],
   openGraph: {
-    title: "Luxora Dynamix | Premium Hospitality Consulting Africa",
-    description: "Transforming restaurants, lounges, and clubs into high-performing destinations in Africa.",
+    title: "Luxora Dynamix | Multi-Faceted Industry Experts",
+    description: "Transforming operations across General Contracting, Consulting, Supply Chain, and Hospitality into high-performing enterprises in Africa.",
     url: "https://luxoradynamix.com",
     siteName: "Luxora Dynamix",
     images: [
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luxora Dynamix | Premium Hospitality Consulting",
-    description: "Expert menu engineering, staff recruitment, and operational systems.",
+    title: "Luxora Dynamix | Industry Excellence",
+    description: "Expert General Contracting, Consulting, Supply Chain, and Hospitality services.",
     images: ["/luxora-og.jpg"],
   },
 };
@@ -49,15 +49,15 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ConsultingBusiness",
+    "@type": "Organization",
     "name": "Luxora Dynamix",
-    "description": "Premium B2B Hospitality Consulting in Africa, specializing in Concept Development, Operational Structuring, Menu Engineering, and Staff Training.",
+    "description": "Premium B2B services in Africa, specializing in General Contracting, Consulting, Supply Chain, and Hospitality.",
     "url": "https://luxoradynamix.com",
     "logo": "https://luxoradynamix.com/luxora-crown.png",
-    "telephone": "+2348000000000",
-    "email": "contact@luxoradynamix.com",
+    "telephone": ["+2348027417453", "+2348145059511"],
+    "email": "luxoradynamix@gmail.com",
     "areaServed": ["Abuja", "Kaduna", "Nigeria", "Africa"],
-    "knowsAbout": ["Restaurant Operations", "Menu Engineering", "Hospitality Training", "Business Strategy", "Franchise Development"]
+    "knowsAbout": ["General Contracting", "Business Consulting", "Supply Chain", "Hospitality Management", "Business Strategy", "Franchise Development"]
   };
 
   return (

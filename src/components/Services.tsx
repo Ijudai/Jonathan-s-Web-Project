@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Utensils, Palette, Cog, Users, TrendingUp, Briefcase } from "lucide-react";
+import { Briefcase, HardHat, Truck, Utensils } from "lucide-react";
 
 export default function Services() {
   const containerRef = useRef<HTMLElement>(null);
@@ -57,7 +57,7 @@ export default function Services() {
         ).to(
           card,
           {
-            y: index === 0 ? -100 : (index === 1 ? -50 : -100), // Slightly offset the cards
+            y: index % 2 === 0 ? -100 : -50, // Slightly offset the cards
             duration: 1,
           },
           ">"
@@ -69,34 +69,24 @@ export default function Services() {
 
   const services = [
     {
-      title: "Culinary Development",
-      icon: <Utensils size={40} className="text-gold mb-3" />,
-      desc: "5-star menus, signature cocktails, and local dishes engineered for premium appeal and profitability.",
+      title: "General Contracting",
+      icon: <HardHat size={40} className="text-gold mb-3" />,
+      desc: "Delivering end-to-end infrastructure, construction, and developmental projects with unyielding precision and quality.",
     },
     {
-      title: "Experience & Ambience",
-      icon: <Palette size={40} className="text-gold mb-3" />,
-      desc: "Instagram-worthy interior design and spatial flow that encourages longer stays and higher spending.",
-    },
-    {
-      title: "Staff Recruitment",
-      icon: <Users size={40} className="text-gold mb-3" />,
-      desc: "Recruitment and professional training programs for chefs, service staff, and operational personnel.",
-    },
-    {
-      title: "Operational Mastery",
-      icon: <Cog size={40} className="text-gold mb-3" />,
-      desc: "Bulletproof SOPs, inventory management, and structured kitchen workflows for high accountability.",
-    },
-    {
-      title: "Marketing & Sales",
-      icon: <TrendingUp size={40} className="text-gold mb-3" />,
-      desc: "High-conversion sales strategies and event structures designed to drive repeat guest visits.",
-    },
-    {
-      title: "Franchise Expansion",
+      title: "Consulting",
       icon: <Briefcase size={40} className="text-gold mb-3" />,
-      desc: "Strategic frameworks enabling hospitality brands to successfully scale into multiple locations.",
+      desc: "Providing strategic advisory, operational blueprints, and comprehensive roadmaps to drive business growth.",
+    },
+    {
+      title: "Supply Chain",
+      icon: <Truck size={40} className="text-gold mb-3" />,
+      desc: "Optimizing procurement, logistics, and resource management to ensure seamless, scalable operations globally.",
+    },
+    {
+      title: "Hospitality",
+      icon: <Utensils size={40} className="text-gold mb-3" />,
+      desc: "Transforming venues through culinary development, impeccable ambience, and world-class operational mastery.",
     },
   ];
 
@@ -115,11 +105,11 @@ export default function Services() {
           Core Proficiencies
         </h2>
         <p className="text-gold font-sans tracking-widest uppercase text-sm">
-          Pillars of Hospitality
+          Our Four Pillars
         </p>
       </div>
 
-      <div className="relative z-20 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 mt-32">
+      <div className="relative z-20 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 mt-32">
         {services.map((service, i) => (
           <div
             key={i}

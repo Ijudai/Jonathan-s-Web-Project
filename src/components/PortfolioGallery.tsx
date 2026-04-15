@@ -46,7 +46,7 @@ export default function PortfolioGallery() {
       ref={containerRef} 
       className="relative w-full h-screen bg-navy text-white overflow-hidden flex flex-col justify-center border-t border-[rgba(201,169,98,0.2)]"
     >
-      <div className="absolute top-16 left-8 md:left-24 z-10 w-full mb-12">
+      <div className="absolute top-28 md:top-24 left-8 md:left-24 z-10 w-full mb-12">
         <h2 className="text-4xl md:text-5xl font-serif mb-2 text-gradient-gold">The Hall of Legends</h2>
         <p className="font-sans text-gray-400">Transformations in Abuja & Kaduna</p>
       </div>
