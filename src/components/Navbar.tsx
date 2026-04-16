@@ -24,6 +24,9 @@ export default function Navbar() {
             <Link href="#services" className="text-gray-300 hover:text-gold transition-colors font-sans text-sm tracking-widest uppercase royal-interactive">
               Services
             </Link>
+            <Link href="#why-us" className="text-gray-300 hover:text-gold transition-colors font-sans text-sm tracking-widest uppercase royal-interactive">
+              Why Us
+            </Link>
             <Link href="#portfolio" className="text-gray-300 hover:text-gold transition-colors font-sans text-sm tracking-widest uppercase royal-interactive">
               Portfolio
             </Link>
@@ -55,6 +58,13 @@ export default function Navbar() {
               className="text-gray-300 hover:text-gold transition-colors font-sans text-sm tracking-widest uppercase border-b border-[rgba(255,255,255,0.05)] pb-2"
             >
               Services
+            </Link>
+            <Link 
+              href="#why-us" 
+              onClick={toggleMenu}
+              className="text-gray-300 hover:text-gold transition-colors font-sans text-sm tracking-widest uppercase border-b border-[rgba(255,255,255,0.05)] pb-2"
+            >
+              Why Us
             </Link>
             <Link 
               href="#portfolio" 

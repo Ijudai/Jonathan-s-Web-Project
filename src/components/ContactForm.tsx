@@ -64,7 +64,7 @@ export default function ContactForm() {
               </div>
               <div>
                 <p className="text-sm text-gray-400 uppercase tracking-widest font-sans mb-1">Email</p>
-                <p className="text-white font-sans text-lg">luxoradynamix@gmail.com</p>
+                <p className="text-white font-sans text-lg">info@luxoradynamix.com</p>
               </div>
             </div>
           </div>

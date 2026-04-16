@@ -55,7 +55,7 @@ export default function RootLayout({
     "url": "https://luxoradynamix.com",
     "logo": "https://luxoradynamix.com/luxora-crown.png",
     "telephone": ["+2348027417453", "+2348145059511"],
-    "email": "luxoradynamix@gmail.com",
+    "email": "info@luxoradynamix.com",
     "areaServed": ["Abuja", "Kaduna", "Nigeria", "Africa"],
     "knowsAbout": ["General Contracting", "Business Consulting", "Supply Chain", "Hospitality Management", "Business Strategy", "Franchise Development"]
   };
