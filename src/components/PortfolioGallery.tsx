@@ -22,22 +22,27 @@ export default function PortfolioGallery() {
 
     if (!containerRef.current || !scrollWrapperRef.current) return;
 
-    gsap.to(scrollWrapperRef.current, {
-      x: () => {
-        if (!scrollWrapperRef.current) return 0;
-        return -(scrollWrapperRef.current.scrollWidth - window.innerWidth);
-      },
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 1,
-        start: "top top",
-        end: () => `+=${scrollWrapperRef.current ? scrollWrapperRef.current.scrollWidth - window.innerWidth : 2000}`,
-        invalidateOnRefresh: true,
-      },
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      gsap.to(scrollWrapperRef.current, {
+        x: () => {
+          if (!scrollWrapperRef.current) return 0;
+          return -(scrollWrapperRef.current.scrollWidth - window.innerWidth);
+        },
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: () => `+=${scrollWrapperRef.current ? scrollWrapperRef.current.scrollWidth - window.innerWidth : 2000}`,
+          invalidateOnRefresh: true,
+        },
+      });
     });
 
+    return () => mm.revert();
   }, { scope: containerRef });
 
   return (
@@ -53,12 +58,13 @@ export default function PortfolioGallery() {
 
       <div 
         ref={scrollWrapperRef} 
-        className="flex w-max items-center h-[60vh] px-8 md:px-24 gap-12 mt-20"
+        className="flex w-max md:w-max items-center h-[60vh] px-8 md:px-24 gap-12 mt-20 overflow-x-auto snap-x snap-mandatory pb-8 md:pb-0 scrollbar-hide md:overflow-visible"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {projects.map((proj, i) => (
           <div 
             key={i} 
-            className="w-[80vw] md:w-[60vw] h-[50vh] flex flex-col justify-end p-8 glass-panel rounded-2xl relative overflow-hidden group royal-interactive"
+            className="w-[85vw] md:w-[60vw] h-[50vh] flex-shrink-0 snap-center flex flex-col justify-end p-8 glass-panel rounded-2xl relative overflow-hidden group royal-interactive"
           >
             {/* Background Image */}
             <Image 

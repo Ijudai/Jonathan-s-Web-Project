@@ -15,56 +15,69 @@ export default function Services() {
 
     if (!containerRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=2000",
-        scrub: 1,
-        pin: true,
-        invalidateOnRefresh: true,
-      },
+    let mm = gsap.matchMedia();
+
+    // Desktop Animation (complex 3D timeline with pinning)
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=2000",
+          scrub: 1,
+          pin: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // Camera Ascension Background Context
+      tl.to(containerRef.current, {
+        backgroundSize: "150%",
+        backgroundColor: "#050b14", // darker navy
+        ease: "none",
+      }, 0);
+
+      // Cards flying toward the viewer
+      cardsRef.current.forEach((card, index) => {
+        if (card) {
+          tl.fromTo(
+            card,
+            { z: -1000, scale: 0.2, opacity: 0, y: 200 },
+            { z: 0, scale: 1, opacity: 1, y: 0, ease: "power2.out", duration: 1 },
+            index * 0.5
+          ).to(
+            card,
+            { y: index % 2 === 0 ? -100 : -50, duration: 1 },
+            ">"
+          );
+        }
+      });
     });
 
-    // Camera Ascension Background Context
-    tl.to(containerRef.current, {
-      backgroundSize: "150%",
-      backgroundColor: "#050b14", // darker navy
-      ease: "none",
-    }, 0);
-
-    // Cards flying toward the viewer
-    cardsRef.current.forEach((card, index) => {
-      if (card) {
-        // Animation
-        tl.fromTo(
-          card,
-          {
-            z: -1000,
-            scale: 0.2,
-            opacity: 0,
-            y: 200,
-          },
-          {
-            z: 0,
-            scale: 1,
-            opacity: 1,
-            y: 0,
-            ease: "power2.out",
-            duration: 1,
-          },
-          index * 0.5 // Staggered appearance
-        ).to(
-          card,
-          {
-            y: index % 2 === 0 ? -100 : -50, // Slightly offset the cards
-            duration: 1,
-          },
-          ">"
-        );
-      }
+    // Mobile Animation (smooth seamless flow, no pinning)
+    mm.add("(max-width: 767px)", () => {
+      cardsRef.current.forEach((card, index) => {
+        if (card) {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+              }
+            }
+          );
+        }
+      });
     });
 
+    return () => mm.revert();
   }, { scope: containerRef });
 
   const services = [
