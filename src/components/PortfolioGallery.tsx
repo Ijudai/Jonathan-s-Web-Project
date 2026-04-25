@@ -120,7 +120,7 @@ export default function PortfolioGallery() {
 
       <div 
         ref={scrollWrapperRef} 
-        className="flex w-max items-center h-[70vh] px-8 md:px-24 gap-8 md:gap-16 mt-20 overflow-x-auto snap-x snap-mandatory pb-8 md:pb-0 scrollbar-hide md:overflow-visible"
+        className="flex w-full md:w-max items-center h-[70vh] px-8 md:px-24 gap-8 md:gap-16 mt-20 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 scrollbar-hide z-20 relative"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {projects.map((proj, i) => (
