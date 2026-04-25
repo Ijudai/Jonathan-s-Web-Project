@@ -111,7 +111,7 @@ export default function PortfolioGallery() {
     <section 
       id="portfolio"
       ref={containerRef} 
-      className="relative w-full h-screen bg-navy text-white overflow-hidden flex flex-col justify-center border-t border-[rgba(201,169,98,0.1)]"
+      className="relative w-full h-[100dvh] md:h-screen bg-navy text-white md:overflow-hidden flex flex-col justify-center border-t border-[rgba(201,169,98,0.1)]"
     >
       <div className="absolute top-28 md:top-24 left-8 md:left-24 z-10 w-full mb-12">
         <h2 className="text-4xl md:text-6xl font-serif mb-2 text-gradient-gold tracking-tight">The Global Hall of Legends</h2>
@@ -120,8 +120,12 @@ export default function PortfolioGallery() {
 
       <div 
         ref={scrollWrapperRef} 
-        className="flex w-full md:w-max items-center h-[70vh] px-8 md:px-24 gap-8 md:gap-16 mt-20 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 scrollbar-hide z-20 relative"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className="flex flex-row flex-nowrap w-full md:w-max items-center h-[70vh] px-4 md:px-24 gap-6 md:gap-16 mt-20 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-10 scrollbar-hide z-30 relative"
+        style={{ 
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none', 
+          msOverflowStyle: 'none' 
+        }}
       >
         {projects.map((proj, i) => (
           <div 
