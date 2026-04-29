@@ -8,7 +8,6 @@ import Image from "next/image";
 
 export default function PortfolioGallery() {
   const containerRef = useRef<HTMLElement>(null);
-  const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
   const projects = [
     { 
@@ -66,41 +65,40 @@ export default function PortfolioGallery() {
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    if (!containerRef.current || !scrollWrapperRef.current) return;
+    if (!containerRef.current) return;
 
     let mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      gsap.to(scrollWrapperRef.current, {
-        x: () => {
-          if (!scrollWrapperRef.current) return 0;
-          return -(scrollWrapperRef.current.scrollWidth - window.innerWidth);
-        },
-        ease: "none",
-        scrollTrigger: {
-          id: "horizontal-scroll",
-          trigger: containerRef.current,
-          pin: true,
-          scrub: 1.2,
-          start: "top top",
-          end: () => `+=${scrollWrapperRef.current ? scrollWrapperRef.current.scrollWidth - window.innerWidth : 2000}`,
-          invalidateOnRefresh: true,
-        },
-      });
-
       // Parallax effect on images
-      gsap.utils.toArray(".project-img").forEach((img: any) => {
-        gsap.to(img, {
-          x: -100,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img,
-            containerAnimation: gsap.getById("horizontal-scroll"), // Note: this requires a specific setup, but simplified here
-            start: "left right",
-            end: "right left",
-            scrub: true
-          }
-        });
+      gsap.utils.toArray(".project-img-container").forEach((container: any) => {
+        const imgWrapper = container.querySelector(".project-img-wrapper");
+        if (imgWrapper) {
+          gsap.to(imgWrapper, {
+            y: 60,
+            ease: "none",
+            scrollTrigger: {
+              trigger: container,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true
+            }
+          });
+        }
+      });
+      
+      // Reveal animations for text
+      gsap.utils.toArray(".project-info").forEach((info: any) => {
+         gsap.from(info, {
+           y: 30,
+           opacity: 0,
+           duration: 1,
+           scrollTrigger: {
+             trigger: info,
+             start: "top 90%",
+             toggleActions: "play none none reverse"
+           }
+         });
       });
     });
 
@@ -111,66 +109,55 @@ export default function PortfolioGallery() {
     <section 
       id="portfolio"
       ref={containerRef} 
-      className="relative w-full h-[100dvh] md:h-screen bg-navy text-white md:overflow-hidden flex flex-col justify-center border-t border-[rgba(201,169,98,0.1)]"
+      className="relative w-full min-h-screen bg-navy text-white flex flex-col border-t border-[rgba(201,169,98,0.1)] py-24 md:py-32"
     >
-      <div className="absolute top-28 md:top-24 left-8 md:left-24 z-10 w-full mb-12">
+      <div className="w-full px-4 md:px-24 mb-20 md:mb-32">
         <h2 className="text-4xl md:text-6xl font-serif mb-2 text-gradient-gold tracking-tight">The Global Hall of Legends</h2>
         <p className="font-sans text-gray-400 uppercase tracking-[0.3em] text-xs">Curated Excellence Across Continents</p>
       </div>
 
       <div 
-        ref={scrollWrapperRef} 
-        className="flex flex-row flex-nowrap w-full md:w-max items-center h-[70vh] px-4 md:px-24 gap-6 md:gap-16 mt-20 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-10 scrollbar-hide z-30 relative"
-        style={{ 
-          WebkitOverflowScrolling: 'touch',
-          scrollbarWidth: 'none', 
-          msOverflowStyle: 'none' 
-        }}
+        className="flex flex-col w-full items-center px-4 md:px-24 gap-20 md:gap-32 z-30 relative pb-10"
       >
         {projects.map((proj, i) => (
           <div 
             key={i} 
-            className="w-[85vw] md:w-[65vw] h-[55vh] md:h-[60vh] flex-shrink-0 snap-center flex flex-col justify-end p-10 glass-panel rounded-3xl relative overflow-hidden group transition-all duration-700 hover:shadow-[0_0_50px_rgba(201,169,98,0.15)]"
+            className="w-full md:w-[85vw] flex flex-col group"
           >
-            {/* Background Image Container with Parallax Simulation */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-               <Image 
-                src={proj.img} 
-                alt={proj.name} 
-                fill
-                sizes="(max-width: 768px) 90vw, 70vw"
-                className="project-img object-cover transition-transform duration-[1.5s] group-hover:scale-110 opacity-60" 
-                priority={i < 2}
-              />
+            {/* Image Container */}
+            <div className="project-img-container w-full h-[55vh] md:h-[75vh] relative overflow-hidden rounded-3xl glass-panel transition-all duration-700 hover:shadow-[0_0_50px_rgba(201,169,98,0.15)] mb-8">
+              <div className="project-img-wrapper absolute top-[-30px] left-0 w-full h-[calc(100%+60px)]">
+                <Image 
+                  src={proj.img} 
+                  alt={proj.name} 
+                  fill
+                  sizes="(max-width: 768px) 95vw, 85vw"
+                  className="project-img object-cover transition-transform duration-[1.5s] group-hover:scale-105 opacity-90 hover:opacity-100" 
+                  priority={i < 2}
+                  style={{ objectPosition: 'center' }}
+                />
+              </div>
+              {/* Optional overlay for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,40,0.4)] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 border border-white/5 rounded-3xl z-40 pointer-events-none group-hover:border-gold/30 transition-colors duration-500" />
             </div>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,40,1)] via-[rgba(10,22,40,0.3)] to-transparent z-10" />
-
-            <div className="relative z-20 transform transition-transform duration-500 group-hover:-translate-y-2">
-              <span className="inline-block px-3 py-1 bg-gold/10 border border-gold/20 rounded-full text-[10px] uppercase tracking-widest text-gold mb-4 backdrop-blur-sm">
-                Project 0{i + 1}
-              </span>
-              <h3 className="text-3xl md:text-5xl font-serif mb-3 tracking-wide">{proj.name}</h3>
-              <p className="font-sans text-gray-400 uppercase tracking-widest text-xs md:text-sm">
+            {/* Title and Description Under the Card */}
+            <div className="project-info flex flex-col md:flex-row justify-between items-start md:items-end px-2">
+              <div>
+                <span className="inline-block px-3 py-1 bg-gold/10 border border-gold/20 rounded-full text-[10px] uppercase tracking-widest text-gold mb-4 backdrop-blur-sm">
+                  Project 0{i + 1}
+                </span>
+                <h3 className="text-3xl md:text-5xl font-serif tracking-wide text-white transition-colors duration-500 group-hover:text-gold/90">{proj.name}</h3>
+              </div>
+              <p className="font-sans text-gray-400 uppercase tracking-widest text-xs md:text-sm mt-4 md:mt-0 md:max-w-[40%] text-left md:text-right">
                 {proj.desc}
               </p>
             </div>
-            
-            {/* Subtle interactive line */}
-            <div className="absolute bottom-0 left-0 h-1 bg-gold w-0 group-hover:w-full transition-all duration-700 ease-out z-30" />
-            
-            {/* Overlay for depth */}
-            <div className="absolute inset-0 border border-white/5 rounded-3xl z-40 pointer-events-none group-hover:border-gold/30 transition-colors duration-500" />
           </div>
         ))}
-      </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10 hidden md:flex">
-         <div className="w-12 h-[1px] bg-gold/30" />
-         <span className="text-[10px] uppercase tracking-[0.5em] text-gold/50">Scroll to Explore</span>
-         <div className="w-12 h-[1px] bg-gold/30" />
       </div>
     </section>
   );
 }
+

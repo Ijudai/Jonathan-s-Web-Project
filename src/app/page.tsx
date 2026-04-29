@@ -1,10 +1,13 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import CustomCursor from "@/components/CustomCursor";
-import Services from "@/components/Services";
-import DetailedServices from "@/components/DetailedServices";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import PortfolioGallery from "@/components/PortfolioGallery";
-import ContactForm from "@/components/ContactForm";
+
+// Dynamically import below-the-fold components to reduce initial JS bundle
+const Services = dynamic(() => import("@/components/Services"));
+const DetailedServices = dynamic(() => import("@/components/DetailedServices"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const PortfolioGallery = dynamic(() => import("@/components/PortfolioGallery"));
+const ContactForm = dynamic(() => import("@/components/ContactForm"));
 
 export default function Home() {
   return (
